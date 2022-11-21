@@ -49,6 +49,7 @@ if [ "$#" -eq 0 ] || [ "${1#-}" != "$1" ]; then
        -p http_resp_hdr_len=${VARNISH_HTTP_RESP_HDR_LEN:-8k} \
        -p http_resp_size=${VARNISH_HTTP_REQ_SIZE:-32k} \
        -p workspace_backend=${VARNISH_WORKSPACE_BACKEND:-64k} \
+       -p thread_pools=${VARNISH_THREAD_POOLS:-2} \
        "$@"
 fi
 
