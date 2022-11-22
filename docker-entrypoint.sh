@@ -34,9 +34,7 @@ if [ "$1" = "varnishd" ]; then
     fi
 fi
 
-# this will check if the first argument is a flag
-# but only works if all arguments require a hyphenated flag
-# -v; -SL; -f arg; etc will work, but not arg1 arg2
+# see https://varnish-cache.org/docs/trunk/reference/varnishd.html#list-of-parameters
 if [ "$#" -eq 0 ] || [ "${1#-}" != "$1" ]; then
     set -- varnishd \
        -j unix,user=${VARNISH_USER:-vcache} \
@@ -46,10 +44,14 @@ if [ "$#" -eq 0 ] || [ "${1#-}" != "$1" ]; then
        -a ${VARNISH_LISTEN_HTTP:-":6081"} \
        -T ${VARNISH_MANAGEMENT_INTERFACE:-"localhost:6082"} \
        -s malloc,${VARNISH_MEMORY_SIZE:-256m} \
+       -p connect_timeout=${VARNISH_CONNECT_TIMEOUT:-3.5} \
        -p http_resp_hdr_len=${VARNISH_HTTP_RESP_HDR_LEN:-8k} \
        -p http_resp_size=${VARNISH_HTTP_REQ_SIZE:-32k} \
-       -p workspace_backend=${VARNISH_WORKSPACE_BACKEND:-64k} \
        -p thread_pools=${VARNISH_THREAD_POOLS:-2} \
+       -p workspace_backend=${VARNISH_WORKSPACE_BACKEND:-96k} \
+       -p workspace_client=${VARNISH_WORKSPACE_CLIENT:-96k} \
+       -p workspace_session=${VARNISH_WORKSPACE_SESSION:-0.75k} \
+       -p workspace_thread=${VARNISH_WORKSPACE_THREAD:-2k} \
        "$@"
 fi
 
