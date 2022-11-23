@@ -27,7 +27,7 @@ RUN \
 	apt-mark auto '.*' > /dev/null; \
 	[ -z "$savedAptMark" ] || apt-mark manual $savedAptMark > /dev/null; \
 # Install varnish package
-	DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends varnish varnish-modules tini; \
+	DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends varnish varnish-modules bind9-host tini; \
 	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
 	rm -rf /var/lib/apt/lists/*; \
 	rm -rf /var/cache/apt/archives/*; \

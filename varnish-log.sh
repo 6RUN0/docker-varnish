@@ -1,5 +1,7 @@
 #!/bin/sh
-
+#
+# see https://varnish-cache.org/docs/trunk/reference/varnishncsa.html
+#
 set -e
 
 if [ -z "$VARNISHNCSA_ENABLE" ]; then
