@@ -8,7 +8,7 @@ else
     exec 3>/dev/null
 fi
 
-if [ "$1" = "varnishd" ]; then
+if [ "$#" -eq 0 ] || [ "${1#-}" != "$1" ]; then
     if find "/docker-entrypoint.d/" -mindepth 1 -maxdepth 1 -type f -print -quit 2>/dev/null | read v; then
         echo >&3 "$0: /docker-entrypoint.d/ is not empty, will attempt to perform configuration"
 
