@@ -52,6 +52,7 @@ if [ "$#" -eq 0 ] || [ "${1#-}" != "$1" ]; then
        -p workspace_client=${VARNISH_WORKSPACE_CLIENT:-96k} \
        -p workspace_session=${VARNISH_WORKSPACE_SESSION:-0.75k} \
        -p workspace_thread=${VARNISH_WORKSPACE_THREAD:-2k} \
+       -p nuke_limit=${VARNISH_NUKE_LIMIT:-50} \
        "$@"
 fi
 
