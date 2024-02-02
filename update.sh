@@ -14,9 +14,8 @@ fi
 distrs=( "${distrs[@]%/}" )
 
 for distr in "${distrs[@]}"; do
-	suites=( $distr/* )
-	suites=( "${suites##*/}" )
-	for suite in "$suites"; do
+	for suite in $distr/*; do
+		suite=${suite##*/}
 		cp *.sh "$distr/$suite/"
 		rm "$distr/$suite/update.sh"
 		sed -r \
