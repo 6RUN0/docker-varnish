@@ -46,6 +46,7 @@ if [ "$#" -eq 0 ] || [ "${1#-}" != "$1" ]; then
        -s malloc,${VARNISH_MEMORY_SIZE:-256m} \
        -p connect_timeout=${VARNISH_CONNECT_TIMEOUT:-3.5} \
        -p http_resp_hdr_len=${VARNISH_HTTP_RESP_HDR_LEN:-8k} \
+       -p http_req_hdr_len=${VARNISH_HTTP_REQ_HDR_LEN:-8k} \
        -p http_resp_size=${VARNISH_HTTP_REQ_SIZE:-32k} \
        -p thread_pools=${VARNISH_THREAD_POOLS:-2} \
        -p workspace_backend=${VARNISH_WORKSPACE_BACKEND:-96k} \
