@@ -32,28 +32,24 @@ if [ "$#" -eq 0 ] || [ "${1#-}" != "$1" ]; then
     else
         echo >&3 "$0: No files found in /docker-entrypoint.d/, skipping configuration"
     fi
-fi
-
-# see https://varnish-cache.org/docs/trunk/reference/varnishd.html#list-of-parameters
-if [ "$#" -eq 0 ] || [ "${1#-}" != "$1" ]; then
+    # see https://varnish-cache.org/docs/trunk/reference/varnishd.html#list-of-parameters
     set -- varnishd \
-       -j unix,user=${VARNISH_USER:-vcache} \
        -F \
-       -f ${VARNISH_CONFIG_FILE:-/etc/varnish/default.vcl} \
-       -S ${VARNISH_SECRET_FILE:-/etc/varnish/secret} \
+       -T ${VARNISH_MANAGEMENT_INTERFACE:-"127.0.0.1:6082"} \
        -a ${VARNISH_LISTEN_HTTP:-":6081"} \
-       -T ${VARNISH_MANAGEMENT_INTERFACE:-"localhost:6082"} \
-       -s malloc,${VARNISH_MEMORY_SIZE:-256m} \
+       -f ${VARNISH_CONFIG_FILE:-/etc/varnish/default.vcl} \
+       -j unix,user=${VARNISH_USER:-varnish} \
        -p connect_timeout=${VARNISH_CONNECT_TIMEOUT:-3.5} \
-       -p http_resp_hdr_len=${VARNISH_HTTP_RESP_HDR_LEN:-8k} \
        -p http_req_hdr_len=${VARNISH_HTTP_REQ_HDR_LEN:-8k} \
+       -p http_resp_hdr_len=${VARNISH_HTTP_RESP_HDR_LEN:-8k} \
        -p http_resp_size=${VARNISH_HTTP_REQ_SIZE:-32k} \
+       -p nuke_limit=${VARNISH_NUKE_LIMIT:-50} \
        -p thread_pools=${VARNISH_THREAD_POOLS:-2} \
        -p workspace_backend=${VARNISH_WORKSPACE_BACKEND:-96k} \
        -p workspace_client=${VARNISH_WORKSPACE_CLIENT:-96k} \
        -p workspace_session=${VARNISH_WORKSPACE_SESSION:-0.75k} \
        -p workspace_thread=${VARNISH_WORKSPACE_THREAD:-2k} \
-       -p nuke_limit=${VARNISH_NUKE_LIMIT:-50} \
+       -s malloc,${VARNISH_MEMORY_SIZE:-256m} \
        "$@"
 fi
 

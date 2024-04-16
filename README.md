@@ -1,4 +1,4 @@
-# Custom docker image, based on debian for Varnish
+# Custom docker image, based on Alpine Linux for Varnish
 
 ## See also
 
