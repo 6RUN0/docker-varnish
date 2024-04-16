@@ -4,8 +4,9 @@ RUN \
     set -eux; \
     apk upgrade --no-cache; \
     apk add --no-cache --upgrade \
-        varnish \
+        su-exec \
         tini \
+        varnish \
         ;
 
 COPY . /
