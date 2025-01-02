@@ -1,13 +1,13 @@
 FROM alpine:latest
 
 RUN \
-    set -eux; \
-    apk upgrade --no-cache; \
-    apk add --no-cache --upgrade \
-        su-exec \
-        tini \
-        varnish \
-        ;
+  set -eux; \
+  apk upgrade --no-cache; \
+  apk add --no-cache --upgrade \
+  su-exec \
+  tini \
+  varnish \
+  ;
 
 COPY . /
 
