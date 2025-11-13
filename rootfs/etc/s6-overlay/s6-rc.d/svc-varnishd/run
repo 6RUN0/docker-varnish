@@ -1,0 +1,47 @@
+#!/command/execlineb -P
+
+with-contenv
+
+#
+# For Varnish parameters documentation,
+# see https://varnish-cache.org/docs/trunk/reference/varnishd.html#list-of-parameters
+#
+importas -S -D 101 VARNISH_CACHE_UID
+importas -S -D 101 VARNISH_GID
+
+importas -S -D 127.0.0.1:6082 VARNISH_MANAGEMENT_INTERFACE
+importas -S -D :6081 VARNISH_LISTEN_HTTP
+importas -S -D /etc/varnish/default.vcl VARNISH_CONFIG_FILE
+importas -S -D 3.5 VARNISH_CONNECT_TIMEOUT
+importas -S -D 8k VARNISH_HTTP_REQ_HDR_LEN
+importas -S -D 8k VARNISH_HTTP_RESP_HDR_LEN
+importas -S -D 32k VARNISH_HTTP_REQ_SIZE
+importas -S -D 50 VARNISH_NUKE_LIMIT
+importas -S -D 2 VARNISH_THREAD_POOLS
+importas -S -D 96k VARNISH_WORKSPACE_BACKEND
+importas -S -D 96k VARNISH_WORKSPACE_CLIENT
+importas -S -D 0.75k VARNISH_WORKSPACE_SESSION
+importas -S -D 2k VARNISH_WORKSPACE_THREAD
+importas -S -D 256m VARNISH_MEMORY_SIZE
+
+foreground { mkdir -p /var/lib/varnish/varnishd }
+foreground { chown -R ${VARNISH_CACHE_UID}:${VARNISH_GID} /var/lib/varnish }
+
+s6-setuidgid ${VARNISH_CACHE_UID}:${VARNISH_GID}
+
+exec varnishd
+  -F
+  -T ${VARNISH_MANAGEMENT_INTERFACE}
+  -a ${VARNISH_LISTEN_HTTP}
+  -f ${VARNISH_CONFIG_FILE}
+  -p connect_timeout=${VARNISH_CONNECT_TIMEOUT}
+  -p http_req_hdr_len=${VARNISH_HTTP_REQ_HDR_LEN}
+  -p http_resp_hdr_len=${VARNISH_HTTP_RESP_HDR_LEN}
+  -p http_resp_size=${VARNISH_HTTP_REQ_SIZE}
+  -p nuke_limit=${VARNISH_NUKE_LIMIT}
+  -p thread_pools=${VARNISH_THREAD_POOLS}
+  -p workspace_backend=${VARNISH_WORKSPACE_BACKEND}
+  -p workspace_client=${VARNISH_WORKSPACE_CLIENT}
+  -p workspace_session=${VARNISH_WORKSPACE_SESSION}
+  -p workspace_thread=${VARNISH_WORKSPACE_THREAD}
+  -s malloc,${VARNISH_MEMORY_SIZE}

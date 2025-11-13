@@ -1,4 +1,2 @@
 *
-!/docker-entrypoint.d/
-!/etc/
-!docker-entrypoint.sh
+!/rootfs/

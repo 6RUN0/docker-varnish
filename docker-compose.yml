@@ -1,0 +1,48 @@
+x-logging: &logging-systemd
+  logging:
+    driver: journald
+
+x-logging-loki: &logging-loki
+  logging:
+    driver: loki
+    options:
+      mode: "non-blocking"
+      loki-url: http://127.0.0.1:3100/loki/api/v1/push
+      max-size: "50m"
+      max-file: "2"
+
+x-build-custom: &build-custom
+  image: "varnish-custom"
+  build:
+    context: .
+    dockerfile: ./Dockerfile
+
+x-unlimit-memlock: &unlimit-memlock
+  ulimits:
+    memlock:
+      soft: -1
+      hard: -1
+
+services:
+  varnish-official:
+    <<:
+      # - *logging-systemd
+      # - *logging-loki
+      - *unlimit-memlock
+    image: varnish:latest
+    container_name: varnish-official
+    hostname: varnish-official
+    restart: always
+
+  varnish-custom:
+    <<:
+      #- *logging-systemd
+      #- *logging-loki
+      - *build-custom
+      - *unlimit-memlock
+    container_name: varnish-custom
+    hostname: varnish-custom
+    restart: always
+    ports:
+      - 6081:6081
+      - 9131:9131

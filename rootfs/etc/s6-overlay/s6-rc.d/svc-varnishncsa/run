@@ -1,0 +1,20 @@
+#!/command/execlineb -P
+
+with-contenv
+
+#
+# varnishncsa - Varnish NCSA log format logger
+# see https://varnish-cache.org/docs/reference/varnishncsa.html
+#
+
+importas -S -D 102 VARNISHLOG_UID
+importas -S -D 101 VARNISH_GID
+
+importas -S -D /etc/varnish/log_format_loki VARNISHNCSA_FORMAT
+importas -S -D /etc/varnish/log_filter_ge_400 VARNISHNCSA_FILTER
+
+s6-setuidgid ${VARNISHLOG_UID}:${VARNISH_GID}
+
+exec varnishncsa
+  -f ${VARNISHNCSA_FORMAT}
+  -Q ${VARNISHNCSA_FILTER}

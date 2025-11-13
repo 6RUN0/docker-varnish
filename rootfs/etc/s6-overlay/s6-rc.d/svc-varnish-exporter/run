@@ -1,0 +1,19 @@
+#!/command/execlineb -P
+
+with-contenv
+
+importas -S -D 102 VARNISHLOG_UID
+importas -S -D 101 VARNISH_GID
+
+importas -S -D :9131 VARNISH_EXPORTER_LISTEN_ADDRESS
+importas -S -D /metrics VARNISH_EXPORTER_TELEMETRY_PATH
+
+foreground { sleep 5 }
+
+s6-setuidgid ${VARNISHLOG_UID}:${VARNISH_GID}
+
+exec varnish_exporter
+  -exit-on-errors
+  -raw
+  -web.listen-address ${VARNISH_EXPORTER_LISTEN_ADDRESS}
+  -web.telemetry-path ${VARNISH_EXPORTER_TELEMETRY_PATH}
