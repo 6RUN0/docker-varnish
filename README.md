@@ -272,18 +272,17 @@ To update Varnish or any of the VMODs:
 - The image assumes system users corresponding to `VARNISH_CACHE_UID` / `VARNISHLOG_UID` / `VARNISH_GID`.
   If you override these IDs or mount host directories with specific ownership, make sure UID/GID mapping is correct.
   By default, the following users/groups are created:
-  `cat /etc/passwd`:
 
-```text
+```bash
+cat /etc/passwd
 ...
 varnish:x:100:101::/nonexistent:/usr/sbin/nologin
 vcache:x:101:101::/nonexistent:/usr/sbin/nologin
 varnishlog:x:102:101::/nonexistent:/usr/sbin/nologin
 ```
 
-  `cat /etc/group`:
-
-```text
+```bash
+cat /etc/group
 ...
 varnish:x:101:
 ```
