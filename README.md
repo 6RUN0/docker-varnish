@@ -108,8 +108,8 @@ services:
       VARNISH_CONFIG_FILE: "/etc/varnish/default.vcl"
       VARNISH_MEMORY_SIZE: "256m"
       # varnishncsa logging
-      VARNISHNCSA_FORMAT: "/etc/varnish/log_format_loki"
-      VARNISHNCSA_FILTER: "/etc/varnish/log_filter_ge_400"
+      VARNISHNCSA_FORMAT: "/etc/varnish/log_format_logfmt"
+      VARNISHNCSA_FILTER: "/etc/varnish/log_filter_default"
       # Prometheus exporter
       VARNISH_EXPORTER_LISTEN_ADDRESS: ":9131"
       VARNISH_EXPORTER_TELEMETRY_PATH: "/metrics"
@@ -205,8 +205,8 @@ The `svc-varnishncsa` service runs [varnishncsa](https://varnish-cache.org/docs/
 |----------|---------------|-------------|
 | `VARNISHLOG_UID` | `102` | UID for the `varnishncsa` process. |
 | `VARNISH_GID` | `101` | GID for `varnishncsa` . |
-| `VARNISHNCSA_FORMAT` | `/etc/varnish/log_format_loki` | Path to a file with the `varnishncsa` log format string. |
-| `VARNISHNCSA_FILTER` | `/etc/varnish/log_filter_ge_400` | Path to a file with `varnishncsa` filter expression. |
+| `VARNISHNCSA_FORMAT` | `/etc/varnish/log_format_logfmt` | Path to a file with the `varnishncsa` log format string. |
+| `VARNISHNCSA_FILTER` | `/etc/varnish/log_filter_default` | Path to a file with `varnishncsa` filter expression. |
 
 You can mount your own format/filter files into `/etc/varnish/` to customize log output, for example to integrate with Loki, ELK, etc.
 

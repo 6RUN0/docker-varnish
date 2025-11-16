@@ -1,1 +1,0 @@
-remote_addr=%h real_ip=%{X-Real-IP}i remote_user=%u host=%{Host}i path=%U%q method=%m status=%s referrer=%{Referer}i user_agent="%{User-agent}i" upstream_addr=%{VCL_Log:upstream_addr}x length=%O request_time=%D date=%{%FT%T%z}t request_id=%{X-Debug-Request-Id}i

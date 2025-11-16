@@ -107,8 +107,8 @@ services:
       VARNISH_CONFIG_FILE: "/etc/varnish/default.vcl"
       VARNISH_MEMORY_SIZE: "256m"
       # varnishncsa logging
-      VARNISHNCSA_FORMAT: "/etc/varnish/log_format_loki"
-      VARNISHNCSA_FILTER: "/etc/varnish/log_filter_ge_400"
+      VARNISHNCSA_FORMAT: "/etc/varnish/log_format_logfmt"
+      VARNISHNCSA_FILTER: "/etc/varnish/log_filter_default"
       # Prometheus exporter
       VARNISH_EXPORTER_LISTEN_ADDRESS: ":9131"
       VARNISH_EXPORTER_TELEMETRY_PATH: "/metrics"
@@ -208,8 +208,8 @@ services:
 |-----------|------------------------|----------|
 | `VARNISHLOG_UID` | `102` | UID процесса `varnishncsa`. |
 | `VARNISH_GID` | `101` | GID для `varnishncsa`. |
-| `VARNISHNCSA_FORMAT` | `/etc/varnish/log_format_loki` | Путь к файлу со строкой формата `varnishncsa`. |
-| `VARNISHNCSA_FILTER` | `/etc/varnish/log_filter_ge_400` | Путь к файлу с фильтром `varnishncsa`. |
+| `VARNISHNCSA_FORMAT` | `/etc/varnish/log_format_logfmt` | Путь к файлу со строкой формата `varnishncsa`. |
+| `VARNISHNCSA_FILTER` | `/etc/varnish/log_filter_default` | Путь к файлу с фильтром `varnishncsa`. |
 
 Вы можете примонтировать собственные файлы формата/фильтра в `/etc/varnish/`,
 чтобы кастомизировать вывод логов, например, для интеграции с Loki, ELK и т. д.

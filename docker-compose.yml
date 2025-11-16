@@ -40,6 +40,8 @@ services:
       #- *logging-loki
       - *build-custom
       - *unlimit-memlock
+    environment:
+      VARNISHNCSA_FORMAT: "/etc/varnish/log_format_json"
     container_name: varnish-custom
     hostname: varnish-custom
     restart: always

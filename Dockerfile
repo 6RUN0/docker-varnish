@@ -158,6 +158,8 @@ RUN \
   apt-get install -y --no-install-recommends --no-install-suggests \
   # Required by libvmod-dynamic
   libgetdns10t64 \
+  # Used by health probes
+  curl \
   ; \
   apt-mark hold varnish varnish-modules; \
   #

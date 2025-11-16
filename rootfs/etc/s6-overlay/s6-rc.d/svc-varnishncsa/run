@@ -10,8 +10,8 @@ with-contenv
 importas -S -D 102 VARNISHLOG_UID
 importas -S -D 101 VARNISH_GID
 
-importas -S -D /etc/varnish/log_format_loki VARNISHNCSA_FORMAT
-importas -S -D /etc/varnish/log_filter_ge_400 VARNISHNCSA_FILTER
+importas -S -D /etc/varnish/log_format_logfmt VARNISHNCSA_FORMAT
+importas -S -D /etc/varnish/log_filter_default VARNISHNCSA_FILTER
 
 s6-setuidgid ${VARNISHLOG_UID}:${VARNISH_GID}
 
