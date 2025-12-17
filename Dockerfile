@@ -52,13 +52,13 @@ ARG VARNISH_MODULES_SHA512SUM=bb8a55b3d665fe6de918f784a6f4276b2053f5b1cd0628d6b6
 ARG VARNISH_MODULES_DIST_URL=https://github.com/varnish/varnish-modules/releases/download/${VARNISH_MODULES_VERSION}/varnish-modules-${VARNISH_MODULES_VERSION}.tar.gz
 # Varnish toolbox arguments
 ARG VARNISH_REPO_TOOLBOX=https://github.com/varnish/toolbox.git
-ARG VARNISH_REPO_TOOLBOX_COMMIT=aa24ceb1869def5c1b0a1772e98b60926206ccc2
+ARG VARNISH_REPO_TOOLBOX_COMMIT=60a3b99273057d57ab29050c36baa720d5324073
 # Libvmod-dynamic arguments
 ARG VMOD_DYNAMIC_REPO=https://github.com/nigoroll/libvmod-dynamic.git
-ARG VMOD_DYNAMIC_REPO_COMMIT=83544fd7d2a307c15e90d807067b381c75c93540
+ARG VMOD_DYNAMIC_REPO_COMMIT=b96243d6de4d21e943ca746c5720201118b5877e
 # Official docker image arguments
 ARG VARNISH_REPO_DOCKER=https://github.com/varnish/docker-varnish.git
-ARG VARNISH_REPO_DOCKER_COMMIT=fce641d80febcd8fc8fad941d721318e3aa95aba
+ARG VARNISH_REPO_DOCKER_COMMIT=1f8ad1c6e8c0a2d23d918923bd9f4296684629b4
 
 RUN \
   set -eux; \
